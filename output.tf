@@ -10,7 +10,8 @@ output "cluster_endpoint" {
 
 output "cluster_certificate_authority_data" {
   description = "EKS cluster certificate authority data"
-  value       = module.eks.cluster_certificate_authority_data[0].data
+  value       = module.eks.cluster_certificate_authority_data
+
 }
 
 output "node_group_role_arn" {
