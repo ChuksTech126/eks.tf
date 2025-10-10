@@ -4,14 +4,13 @@ output "cluster_name" {
 }
 
 output "cluster_endpoint" {
-  description = "EKS cluster endpoint"
+  description = "EKS cluster API server endpoint"
   value       = module.eks.cluster_endpoint
 }
 
-output "cluster_kubeconfig" {
-  description = "Kubeconfig for the cluster"
-  value       = module.eks.kubeconfig
-  sensitive   = true
+output "cluster_certificate_authority_data" {
+  description = "EKS cluster certificate authority data"
+  value       = module.eks.cluster_certificate_authority_data[0].data
 }
 
 output "node_group_role_arn" {
