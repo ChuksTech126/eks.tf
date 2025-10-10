@@ -10,7 +10,7 @@ This project provisions an **Amazon EKS cluster** with **Terraform** using AWS-m
 - IAM user/role with `AdministratorAccess`
 - Terraform >= 1.5.0
 - AWSCli
-- Terraform Cli
+- TerraformCli
 
 
 ---
