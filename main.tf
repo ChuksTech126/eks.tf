@@ -25,7 +25,44 @@ data "aws_availability_zones" "available" {}
 # -------------------------
 # EKS Cluster
 # -------------------------
-module "eks" {
+module "eks" {module "eks" {
+  source  = "terraform-aws-modules/eks/aws"
+  version = "20.11.0"
+
+  cluster_name    = var.cluster_name
+  cluster_version = "1.29"
+  cluster_endpoint_public_access = true
+
+  # Fixed line
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnets
+
+  # Manage aws-auth so IAM user can access cluster
+  manage_aws_auth_configmap = true
+
+  aws_auth_users = [
+    {
+      userarn  = "arn:aws:iam::028061992015:user/Chuks"
+      username = "chuks"
+      groups   = ["system:masters"]
+    }
+  ]
+
+  eks_managed_node_groups = {
+    default = {
+      instance_types = [var.node_instance_type]
+      desired_size   = var.desired_capacity
+      min_size       = 1
+      max_size       = 5
+    }
+  }
+
+  tags = {
+    Environment = "dev"
+    Terraform   = "true"
+  }
+}
+
   source  = "terraform-aws-modules/eks/aws"
   version = "20.11.0"
 
