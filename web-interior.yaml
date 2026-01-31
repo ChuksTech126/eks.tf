@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: web-interior
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     app: web-interior
+ template:
+   metadata:
+     labels:
+       app: web-interior
+   spec:
+     containers:
+     - name: web-interior
+       image: bloomytech/interior:latest
+       ports:
+       - containerPort: 80
