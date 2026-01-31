@@ -33,20 +33,4 @@ module "eks" {
   cluster_version = "1.29"
   cluster_endpoint_public_access = true
 
-  vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.vpc.private_subnets
-
-  eks_managed_node_groups = {
-    default = {
-      instance_types = [var.node_instance_type]
-      desired_size   = var.desired_capacity
-      min_size       = 1
-      max_size       = 5
-    }
-  }
-
-  tags = {
-    Environment = "dev"
-    Terraform   = "true"
-  }
-}
+  vpc_i_
